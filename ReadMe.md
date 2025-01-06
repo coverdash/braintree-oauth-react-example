@@ -93,7 +93,7 @@ The application will be available at:
 - CORS is properly configured
 - Input validation is implemented
 
-> **Warning**
+> [!IMPORTANT]  
 > This project is a demonstration and should not be used in production as-is. Ensure that all sensitive information, such as OAuth tokens and API keys, are stored securely and not in local storage. Follow best practices for security and data protection.
 
 ## Token Storage
