@@ -44,6 +44,7 @@ export function OAuthCallback() {
           expires_at: tokens.expiresAt,
           scope: tokens.scope,
           merchant_id: merchantId ?? "",
+          payment_nonce: "",
         });
 
         setStatus("success");

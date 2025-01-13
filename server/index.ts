@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { exchangeToken } from "./oauth";
 import { createTransaction } from "./transactions";
+import { createNonce } from "./grant/nonce";
+import { createSubscription } from "./subscriptions";
 
 dotenv.config();
 
@@ -27,6 +29,24 @@ app.post("/api/oauth/token", async (req: any, res: any) => {
     console.error("Token exchange error:", error);
     res.status(500).json({ error: "Failed to exchange token" });
   }
+});
+
+app.post("/api/grant/nonce", async (req, res) => {
+  const { accessToken, paymentMethodToken } = req.body;
+  const nonceResult = await createNonce(accessToken, paymentMethodToken);
+  console.log("nonceResult", nonceResult);
+  res.json(nonceResult);
+});
+
+app.post("/api/subscriptions", async (req, res) => {
+  const { paymentMethodNonce, planId, price, downPayment } = req.body;
+  const subscriptionResult = await createSubscription(
+    paymentMethodNonce,
+    planId,
+    downPayment,
+    price
+  );
+  res.json(subscriptionResult);
 });
 
 app.post("/api/transactions", async (req, res) => {

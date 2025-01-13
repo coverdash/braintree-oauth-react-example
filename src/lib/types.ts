@@ -15,3 +15,9 @@ export interface TransactionResult {
   };
   error?: string;
 }
+
+export interface PaymentNonceResult {
+  success: boolean;
+  nonce: string;
+  error?: string;
+}

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { TokenStorage } from "../lib/storage";
 
-export function PaymentForm() {
-  const [amount, setAmount] = useState("");
-  const [paymentMethodToken, setPaymentMethodToken] = useState("");
+export function SubscriptionForm() {
+  const [downPayment, setDownPayment] = useState("");
+  const [price, setPrice] = useState("");
+  const [planId, setPlanId] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -15,13 +16,18 @@ export function PaymentForm() {
     setStatus("loading");
 
     try {
-      const accessToken = TokenStorage.getAccessToken();
-      const result = await fetch("http://localhost:9090/api/transactions", {
+      const paymentMethodNonce = TokenStorage.getPaymentNonce();
+      const result = await fetch("http://localhost:9090/api/subscriptions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ accessToken, amount, paymentMethodToken }),
+        body: JSON.stringify({
+          paymentMethodNonce,
+          planId,
+          downPayment,
+          price,
+        }),
       });
 
       const data = await result.json();
@@ -42,39 +48,42 @@ export function PaymentForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <p className="text-xs text-gray-600">
-        To create a transaction as the connected merchant, the following must be
-        true:
+        To create a subscription as the connected merchant, the following must
+        be true:
         <ul className="list-disc list-inside">
           <li>
-            You, acting as Merchant B, have approved the OAuth connection
-            (provided by Merchant A), which has redirected you to this screen.
+            A nonce has been created by Merchant A and is saved in localStorage.
           </li>
           <li>
-            The OAuth scope includes <code>shared_vault_transactions</code>. See
-            file <code>src/lib/oauth.ts</code>.
+            The following environment variables are set in the server for{" "}
+            <b>Merchant B</b>: <code>BRAINTREE_PUBLIC_KEY</code>,{" "}
+            <code>BRAINTREE_PRIVATE_KEY</code>, and{" "}
+            <code>BRAINTREE_MERCHANT_ID</code>.
           </li>
           <li>
-            The Access Token is saved in order for Merchant A to create a
-            transaction on behalf of Merchant B. (See localStorage.)
+            A Plan exists in Merchant B's Braintree account so the Plan ID can
+            be entered in the form below.
           </li>
         </ul>
       </p>
       <p className="text-xs text-gray-600">
-        If successful, the Transaction will be created in Merchant A's web
-        environment and will be available in Merchant B's Braintree account.
+        If successful, a new Customer and Payment Method will be created in
+        Merchant B's Braintree account using the nonce created in the previous
+        step. In addition, a new Subscription will be created for that Customer
+        and their Payment Method.
       </p>
       <div>
         <label
-          htmlFor="amount"
+          htmlFor="downPayment"
           className="block text-sm font-medium text-gray-700"
         >
-          Amount
+          Down Payment
         </label>
         <input
           type="number"
-          id="amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          id="downPayment"
+          value={downPayment}
+          onChange={(e) => setDownPayment(e.target.value)}
           className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           required
         />
@@ -82,19 +91,33 @@ export function PaymentForm() {
 
       <div>
         <label
-          htmlFor="paymentMethodToken"
+          htmlFor="price"
           className="block text-sm font-medium text-gray-700"
         >
-          Payment Method Token
+          Price
         </label>
-        <p className="text-xs text-gray-500">
-          An existing Payment Method Token from Merchant A's Braintree account.
-        </p>
+        <input
+          type="number"
+          id="price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          required
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="planId"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Plan ID
+        </label>
         <input
           type="text"
-          id="paymentMethodToken"
-          value={paymentMethodToken}
-          onChange={(e) => setPaymentMethodToken(e.target.value)}
+          id="planId"
+          value={planId}
+          onChange={(e) => setPlanId(e.target.value)}
           className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           required
         />
@@ -105,7 +128,7 @@ export function PaymentForm() {
       )}
 
       {status === "success" && (
-        <div className="text-green-600 text-sm">Transaction successful!</div>
+        <div className="text-green-600 text-sm">Subscription successful!</div>
       )}
 
       <button
@@ -113,7 +136,7 @@ export function PaymentForm() {
         disabled={status === "loading"}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
       >
-        {status === "loading" ? "Processing..." : "Process Payment"}
+        {status === "loading" ? "Processing..." : "Create Subscription"}
       </button>
 
       {status !== "loading" && dataJson && (

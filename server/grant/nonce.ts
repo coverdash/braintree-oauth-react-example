@@ -1,11 +1,12 @@
 import { BraintreeGateway } from "braintree";
-import type { TransactionResult } from "../src/lib/types";
 
-export async function createTransaction(
+export async function createNonce(
   accessToken: string,
-  amount: string,
   paymentMethodToken: string
-): Promise<TransactionResult> {
+): Promise<
+  | braintree.ValidatedResponse<braintree.PaymentMethodNonce>
+  | { success: false; error: string }
+> {
   if (!accessToken) {
     return {
       success: false,
@@ -18,12 +19,12 @@ export async function createTransaction(
       accessToken,
     });
 
-    const result = await gateway.transaction.sale({
-      amount,
-      sharedPaymentMethodToken: paymentMethodToken,
+    const nonceResult = await gateway.paymentMethod.grant(paymentMethodToken, {
+      allowVaulting: true,
+      includeBillingPostalCode: true,
     });
 
-    return result;
+    return nonceResult;
   } catch (error) {
     console.error("Transaction error:", error);
     return {

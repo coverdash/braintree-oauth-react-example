@@ -9,7 +9,7 @@ export function generateOAuthURL() {
     merchant_id: BRAINTREE_CONFIG.merchantId,
     client_id: BRAINTREE_CONFIG.clientId,
     redirect_uri: BRAINTREE_CONFIG.redirectUri,
-    scope: "grant_payment_method,shared_vault_transactions",
+    scope: ["grant_payment_method", "shared_vault_transactions"].join(","),
   } as Record<string, string>);
 
   console.log(BRAINTREE_CONFIG);

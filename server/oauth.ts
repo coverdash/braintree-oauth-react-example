@@ -19,9 +19,9 @@ export async function exchangeToken(
   const clientId = process.env.BRAINTREE_OAUTH_CLIENT_ID;
   const clientSecret = process.env.BRAINTREE_OAUTH_CLIENT_SECRET;
 
-  // console.log("environment", environment);
-  // console.log("clientId", clientId);
-  // console.log("clientSecret", clientSecret);
+  console.log("environment", environment);
+  console.log("clientId", clientId);
+  console.log("clientSecret", clientSecret);
 
   if (!clientId || !clientSecret) {
     throw new Error("Missing Braintree credentials");
