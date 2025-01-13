@@ -15,11 +15,16 @@ In this example, Merchant A provides this application to Merchant B, allowing th
 - Grant OAuth permissions to Merchant A
 - Allow access to customer payment methods
 - Enable facilitated transactions
+- Create Subscriptions
 
-The integration uses two main Braintree APIs:
+The integration uses the following Braintree APIs:
 
 - [Access Token API](https://developer.paypal.com/braintree/docs/guides/extend/oauth/access-tokens/node#creating-an-access-token) - For OAuth authentication
+- [Grant API](https://developer.paypal.com/braintree/docs/reference/xml-api/grant-api/overview/node) - For creating Payment Method Nonces
+- [Customer API](https://developer.paypal.com/braintree/docs/reference/request/customer/create/node) - For creating Customers
+- [Payment Method API](https://developer.paypal.com/braintree/docs/reference/request/payment-method/create/node) - For creating Payment Methods
 - [Transaction API](https://developer.paypal.com/braintree/docs/guides/extend/oauth/shared-vault/node) - For creating Shared Vault Transactions
+- [Subscription API](https://developer.paypal.com/braintree/docs/reference/request/subscription/create/node) - For creating Subscriptions
 
 ## Features
 
@@ -96,6 +101,8 @@ The application will be available at:
 
 - `POST /api/oauth/token` - Exchange authorization code for tokens
 - `POST /api/transactions` - Create a shared vault transaction
+- `POST /api/grant/nonce` - Create a payment method nonce
+- `POST /api/subscriptions` - Create a subscription
 
 ## Security Considerations
 
