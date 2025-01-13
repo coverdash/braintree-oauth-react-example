@@ -4,7 +4,7 @@ This React TypeScript project demonstrates a Braintree OAuth integration flow be
 
 Want to experience it firsthand in your own environment? Simply click the button below to deploy it in a matter of clicks:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcoverdash%2Fbraintree-oauth-react-example&env=VITE_BRAINTREE_ENVIRONMENT,VITE_BRAINTREE_MERCHANT_ID,VITE_BRAINTREE_OAUTH_CLIENT_ID,BRAINTREE_ENVIRONMENT,BRAINTREE_MERCHANT_ID,BRAINTREE_OAUTH_CLIENT_ID,BRAINTREE_OAUTH_CLIENT_SECRET)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcoverdash%2Fbraintree-oauth-react-example&env=VITE_BRAINTREE_ENVIRONMENT,VITE_BRAINTREE_MERCHANT_ID,VITE_BRAINTREE_OAUTH_CLIENT_ID,BRAINTREE_ENVIRONMENT,BRAINTREE_MERCHANT_ID,BRAINTREE_OAUTH_CLIENT_ID,BRAINTREE_OAUTH_CLIENT_SECRET,BRAINTREE_PUBLIC_KEY,BRAINTREE_PRIVATE_KEY)
 
 To authenticate the OAuth permissions request, a second Braintree account will be necessary for approval.
 
@@ -57,13 +57,14 @@ VITE_BRAINTREE_ENVIRONMENT=sandbox
 VITE_BRAINTREE_MERCHANT_ID=MERCHANT_A_MERCHANT_ID
 VITE_BRAINTREE_OAUTH_CLIENT_ID=MERCHANT_A_OAUTH_CLIENT_ID
 
-# Server Environment Variables (Merchant A)
 BRAINTREE_ENVIRONMENT=sandbox
-BRAINTREE_MERCHANT_ID=MERCHANT_A_MERCHANT_ID
+
+# Server Environment Variables (Merchant A)
 BRAINTREE_OAUTH_CLIENT_ID=MERCHANT_A_OAUTH_CLIENT_ID
 BRAINTREE_OAUTH_CLIENT_SECRET=MERCHANT_A_OAUTH_CLIENT_SECRET
 
 # Server Environment Variables (Merchant B)
+BRAINTREE_MERCHANT_ID=MERCHANT_B_MERCHANT_ID
 BRAINTREE_PUBLIC_KEY=MERCHANT_B_PUBLIC_KEY
 BRAINTREE_PRIVATE_KEY=MERCHANT_B_PRIVATE_KEY
 ```
