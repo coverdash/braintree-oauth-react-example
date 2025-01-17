@@ -61,6 +61,7 @@ Create a `.env` file in the root directory with the following variables:
 VITE_BRAINTREE_ENVIRONMENT=sandbox
 VITE_BRAINTREE_MERCHANT_ID=MERCHANT_A_MERCHANT_ID
 VITE_BRAINTREE_OAUTH_CLIENT_ID=MERCHANT_A_OAUTH_CLIENT_ID
+VITE_BRAINTREE_REDIRECT_URI=http://localhost:5173/oauth-callback
 
 BRAINTREE_ENVIRONMENT=sandbox
 
