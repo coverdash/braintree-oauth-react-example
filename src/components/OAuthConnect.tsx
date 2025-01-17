@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { KeyRound } from "lucide-react";
-// import { gateway } from '../lib/braintree';
 
 export function OAuthConnect() {
   const [connected, setConnected] = useState(false);

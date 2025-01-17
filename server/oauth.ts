@@ -16,8 +16,8 @@ export async function exchangeToken(
   authorizationCode: string
 ): Promise<OAuthTokenResponse> {
   const environment = process.env.BRAINTREE_ENVIRONMENT || "sandbox";
-  const clientId = process.env.BRAINTREE_OAUTH_CLIENT_ID;
-  const clientSecret = process.env.BRAINTREE_OAUTH_CLIENT_SECRET;
+  const clientId = `client_id$${environment}$${process.env.BRAINTREE_OAUTH_CLIENT_ID}`;
+  const clientSecret = `client_secret$${environment}$${process.env.BRAINTREE_OAUTH_CLIENT_SECRET}`;
 
   console.log("environment", environment);
   console.log("clientId", clientId);

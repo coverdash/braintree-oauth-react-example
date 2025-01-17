@@ -56,6 +56,8 @@ yarn
 
 Create a `.env` file in the root directory with the following variables:
 
+**Note**: Remove prefix `client_id$sandbox$` and `client_secret$sandbox$` from environment variable values in the `.env` file. This prefix is hard-coded within the code to avoid issues with special characters. For example, `client_id$sandbox$1234567890` should be `1234567890`.
+
 ```env
 # Client Accessible Environment Variables
 VITE_BRAINTREE_ENVIRONMENT=sandbox

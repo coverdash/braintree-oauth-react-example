@@ -3,7 +3,17 @@ import { describe, it, expect, vi } from "vitest";
 // @ts-ignore
 import { render, screen, fireEvent } from "@testing-library/react";
 import { OAuthConnect } from "../components/OAuthConnect";
-import { gateway } from "../lib/braintree";
+import braintree from "braintree";
+
+const environment = process.env.BRAINTREE_ENVIRONMENT || "sandbox";
+const clientId = `client_id$${environment}$${process.env.BRAINTREE_OAUTH_CLIENT_ID}`;
+const clientSecret = `client_secret$${environment}$${process.env.BRAINTREE_OAUTH_CLIENT_SECRET}`;
+
+export const gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  clientId: clientId ?? "",
+  clientSecret: clientSecret ?? "",
+});
 
 // Mock the Braintree gateway
 vi.mock("../lib/braintree", () => ({

@@ -2,8 +2,10 @@
 export const BRAINTREE_CONFIG = {
   // @ts-ignore
   merchantId: import.meta.env.VITE_BRAINTREE_MERCHANT_ID,
-  // @ts-ignore
-  clientId: import.meta.env.VITE_BRAINTREE_OAUTH_CLIENT_ID,
+  clientId: `client_id$sandbox$${
+    // @ts-ignore
+    import.meta.env.VITE_BRAINTREE_OAUTH_CLIENT_ID
+  }`,
   // @ts-ignore
   redirectUri: import.meta.env.VITE_BRAINTREE_REDIRECT_URI,
   // @ts-ignore
