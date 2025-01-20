@@ -16,7 +16,7 @@ export function NonceTrigger() {
 
     try {
       const accessToken = TokenStorage.getAccessToken();
-      const result = await fetch("http://localhost:9090/api/grant/nonce", {
+      const result = await fetch("/api/grant/nonce", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

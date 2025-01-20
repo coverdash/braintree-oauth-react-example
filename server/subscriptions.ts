@@ -43,6 +43,8 @@ export async function createSubscription(
       privateKey,
     });
 
+    console.log("gateway", gateway);
+
     const customerResult = await gateway.customer.create({
       firstName: generateRandomString(5),
       lastName: generateRandomString(5),

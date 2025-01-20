@@ -24,7 +24,7 @@ export function OAuthCallback() {
       }
 
       try {
-        const response = await fetch("http://localhost:9090/api/oauth/token", {
+        const response = await fetch("/api/oauth/token", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

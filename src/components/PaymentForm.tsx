@@ -16,7 +16,7 @@ export function PaymentForm() {
 
     try {
       const accessToken = TokenStorage.getAccessToken();
-      const result = await fetch("http://localhost:9090/api/transactions", {
+      const result = await fetch("/api/transactions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

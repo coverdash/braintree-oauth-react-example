@@ -10,7 +10,7 @@ import { createSubscription } from "./subscriptions";
 dotenv.config();
 
 const app = express();
-const port = 9090;
+const port = process.env.PORT || 9090;
 
 app.use(cors());
 app.use(express.json());

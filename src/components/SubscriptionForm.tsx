@@ -17,7 +17,7 @@ export function SubscriptionForm() {
 
     try {
       const paymentMethodNonce = TokenStorage.getPaymentNonce();
-      const result = await fetch("http://localhost:9090/api/subscriptions", {
+      const result = await fetch("/api/subscriptions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
