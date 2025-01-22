@@ -6,6 +6,7 @@ import { exchangeToken } from "./oauth";
 import { createTransaction } from "./transactions";
 import { createNonce } from "./grant/nonce";
 import { createSubscription } from "./subscriptions";
+import { createCustomer } from "./customers";
 
 dotenv.config();
 
@@ -29,6 +30,18 @@ app.post("/api/oauth/token", async (req: any, res: any) => {
     console.error("Token exchange error:", error);
     res.status(500).json({ error: "Failed to exchange token" });
   }
+});
+
+app.post("/api/customers", async (req, res) => {
+  const { firstName, lastName, email, phone } = req.body;
+  const customerResult = await createCustomer(
+    firstName,
+    lastName,
+    email,
+    phone
+  );
+  console.log("customerResult", customerResult);
+  res.json(customerResult);
 });
 
 app.post("/api/grant/nonce", async (req, res) => {

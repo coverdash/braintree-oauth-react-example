@@ -6,6 +6,7 @@ import { TokenStorage } from "./lib/storage";
 import { SubscriptionForm } from "./components/SubscriptionForm";
 import { useState } from "react";
 import { PaymentForm } from "./components/PaymentForm";
+import { CustomerForm } from "./components/CustomerForm";
 
 function Home() {
   const isConnected = !!TokenStorage.getAccessToken();
@@ -45,6 +46,16 @@ function Home() {
                 </button>
                 <button
                   className={`${
+                    view === "create-customer"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-4 py-2 rounded-md`}
+                  onClick={() => setView("create-customer")}
+                >
+                  Create Customer
+                </button>
+                <button
+                  className={`${
                     view === "create-nonce"
                       ? "bg-blue-500 text-white"
                       : "bg-gray-200 text-gray-600"
@@ -68,6 +79,7 @@ function Home() {
               {view === "create-transaction" && <PaymentForm />}
               {view === "create-nonce" && <NonceTrigger />}
               {view === "create-subscription" && <SubscriptionForm />}
+              {view === "create-customer" && <CustomerForm />}
             </>
           )}
         </div>
