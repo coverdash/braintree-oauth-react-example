@@ -80,11 +80,14 @@ BRAINTREE_PRIVATE_KEY=MERCHANT_B_PRIVATE_KEY
 ## Running the Application
 
 ```bash
-# Terminal 1 - Frontend
-yarn dev
+# Run Client
+yarn client
 
-# Terminal 2 - Backend
+# Run Server
 yarn server
+
+# Run Both
+yarn dev
 ```
 
 The application will be available at:
