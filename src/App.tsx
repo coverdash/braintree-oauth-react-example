@@ -74,6 +74,15 @@ function Home() {
                 >
                   Create Subscription
                 </button>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded-md"
+                  onClick={() => {
+                    TokenStorage.clearTokens();
+                    window.location.reload();
+                  }}
+                >
+                  Clear Tokens
+                </button>
               </div>
 
               {view === "create-transaction" && <PaymentForm />}

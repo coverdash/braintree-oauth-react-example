@@ -31,6 +31,9 @@ export const TokenStorage = {
     localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.MERCHANT_ID);
+    localStorage.removeItem(STORAGE_KEYS.SCOPE);
+    localStorage.removeItem(STORAGE_KEYS.EXPIRES_AT);
+    localStorage.removeItem(STORAGE_KEYS.PAYMENT_NONCE);
   },
   getPaymentNonce: () => localStorage.getItem(STORAGE_KEYS.PAYMENT_NONCE) ?? "",
   getRefreshToken: () => localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN) ?? "",
